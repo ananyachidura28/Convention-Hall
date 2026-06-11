@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Function Hall Booking Website - Responsive Stylesheet
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (1024px and below) */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+  
+  .halls-container {
+    grid-template-columns: 280px 1fr !important;
+  }
+}
+
+/* Tablets & Mobile Devices (768px and below) */
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 60px 0;
+  }
+
+  .section-header h2 {
+    font-size: 1.8rem;
+  }
+
+  /* Navigation Drawer System */
+  .menu-btn {
+    display: flex;
+    z-index: 1001;
+  }
+  
+  .menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .menu-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: var(--bg-secondary);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 100px 40px;
+    gap: 30px;
+    transition: right var(--transition-normal);
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1.1rem;
+    width: 100%;
+  }
+
+  .nav-actions {
+    margin-right: 40px;
+  }
+
+  /* Hero Banner Layout */
+  .hero-search-wrapper {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    border-radius: var(--border-radius-md) !important;
+  }
+
+  .hero-search-item {
+    border-right: none !important;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 12px;
+    padding-left: 0 !important;
+  }
+
+  .hero-search-item:last-child {
+    border-bottom: none;
+  }
+
+  .search-btn {
+    width: 100%;
+    padding: 16px !important;
+    border-radius: var(--border-radius-sm) !important;
+  }
+
+  /* Catalog Page */
+  .halls-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  .filters-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    max-width: 320px;
+    height: 100vh;
+    z-index: 1500;
+    background: var(--bg-secondary);
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15);
+    transition: left var(--transition-normal);
+  }
+
+  .filters-sidebar.active {
+    left: 0;
+  }
+
+  .filters-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1400;
+  }
+
+  .filters-overlay.active {
+    display: block;
+  }
+
+  .mobile-filter-trigger {
+    display: flex !important;
+  }
+
+  /* Details Gallery */
+  .details-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .gallery-main {
+    height: 300px !important;
+  }
+
+  /* Comparison Page */
+  .compare-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .compare-table {
+    min-width: 600px;
+  }
+
+  /* Dashboard Tabs */
+  .dashboard-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .dashboard-tab {
+    padding: 10px 16px !important;
+    font-size: 0.9rem;
+  }
+
+  /* Multi-step booking form */
+  .step-indicators {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* Small Mobile Devices (480px and below) */
+@media (max-width: 480px) {
+  .section-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .theme-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .card-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    padding: 24px 16px;
+  }
+}

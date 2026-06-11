@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search, filter, and compare function halls, wedding venues, and banquets. Filter by budget, guest capacity, amenities, and location.">
+  <title>All Function Halls | GrandVows</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="page-loader">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">🏛️ SEARCHING BANQUETS...</div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        🏛️ Grand<span>Vows</span>
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="halls.html" class="nav-link active">Function Halls</a></li>
+        <li><a href="regions.html" class="nav-link">Regions</a></li>
+        <li><a href="compare.html" class="nav-link">Compare Halls</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+        <li><a href="dashboard.html" class="nav-link" style="display: none;">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+          <span class="moon-icon">🌙</span>
+          <span class="sun-icon">☀️</span>
+        </button>
+        <button class="btn btn-outline btn-sm" id="auth-nav-btn">Login / Register</button>
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle Mobile Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub-Hero banner -->
+  <section class="hero" style="min-height: 35vh; padding: 120px 0 30px 0;">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <h1 style="font-size: 2.5rem; margin-bottom: 8px;">Explore <span>Function Halls</span></h1>
+      <p style="font-size: 1rem; margin-bottom: 0;">Search and filter through local venues. Select up to 3 halls to compare side-by-side.</p>
+    </div>
+  </section>
+
+  <!-- Main Catalog Area -->
+  <section class="section-padding" style="padding: 40px 0 80px 0;">
+    <div class="container">
+      
+      <!-- Mobile Filter Trigger and Active Filters Panel -->
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+        <button class="mobile-filter-trigger" id="mobile-filter-trigger">
+          <span>⚙️</span> Show Filters & Search
+        </button>
+      </div>
+
+      <div class="halls-container">
+        <!-- Sidebar filters -->
+        <aside class="filters-sidebar glass-panel" id="filters-sidebar">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px;">
+            <h3 style="font-size: 1.25rem;">Filters</h3>
+            <button id="clear-filters-btn" style="background:none; color: var(--color-primary); font-weight:600; cursor:pointer; font-size:0.85rem;">Reset All</button>
+          </div>
+
+          <!-- Search by Name/City -->
+          <div class="filter-section">
+            <label class="filter-title" for="filter-search">Keyword Search</label>
+            <input type="text" id="filter-search" class="form-input" placeholder="Search name or location..." style="margin-top: 8px;">
+          </div>
+
+          <!-- Region Filter -->
+          <div class="filter-section">
+            <label class="filter-title" for="filter-region">Region</label>
+            <select id="filter-region" class="form-input" style="margin-top: 8px;">
+              <option value="">All Regions</option>
+              <option value="hyderabad">Hyderabad</option>
+              <option value="bengaluru">Bengaluru</option>
+              <option value="chennai">Chennai</option>
+              <option value="visakhapatnam">Visakhapatnam</option>
+              <option value="vijayawada">Vijayawada</option>
+              <option value="tirupati">Tirupati</option>
+              <option value="guntur">Guntur</option>
+            </select>
+          </div>
+
+          <!-- Budget Range Slider -->
+          <div class="filter-section">
+            <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 8px;">
+              <span class="filter-title" style="margin-bottom:0;">Max Price</span>
+              <span id="price-slider-val" style="color: var(--color-primary);">₹2,00,000</span>
+            </div>
+            <input type="range" id="filter-price" class="range-input" min="30000" max="200000" step="5000" value="200000">
+          </div>
+
+          <!-- Capacity Range -->
+          <div class="filter-section">
+            <span class="filter-title">Guest Capacity</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-capacity" value="small"> Small (Up to 300)
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-capacity" value="medium"> Medium (300 - 700)
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-capacity" value="large"> Large (700 - 1200)
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-capacity" value="grand"> Grand (1200+)
+              </label>
+            </div>
+          </div>
+
+          <!-- Air Conditioning -->
+          <div class="filter-section">
+            <span class="filter-title">AC Options</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <label class="service-checkbox-label">
+                <input type="radio" name="filter-ac" class="filter-ac" value="all" checked> Show All
+              </label>
+              <label class="service-checkbox-label">
+                <input type="radio" name="filter-ac" class="filter-ac" value="ac"> Air Conditioned
+              </label>
+              <label class="service-checkbox-label">
+                <input type="radio" name="filter-ac" class="filter-ac" value="non-ac"> Non-AC
+              </label>
+            </div>
+          </div>
+
+          <!-- Facilities Checkboxes -->
+          <div class="filter-section">
+            <span class="filter-title">Venue Facilities</span>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-facilities" value="parking"> Parking Slots
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-facilities" value="rooms"> Guest Rooms (4+)
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-facilities" value="catering"> In-house Catering
+              </label>
+              <label class="service-checkbox-label">
+                <input type="checkbox" class="filter-facilities" value="dj"> DJ Sound System
+              </label>
+            </div>
+          </div>
+
+          <!-- Star Rating -->
+          <div class="filter-section">
+            <span class="filter-title">Minimum Rating</span>
+            <select id="filter-rating" class="form-input" style="margin-top: 8px;">
+              <option value="0">All Ratings</option>
+              <option value="4.3">4.3+ Stars</option>
+              <option value="4.5">4.5+ Stars</option>
+              <option value="4.7">4.7+ Stars</option>
+            </select>
+          </div>
+        </aside>
+
+        <!-- Main listings area -->
+        <main>
+          <!-- Toolbar -->
+          <div class="catalog-toolbar">
+            <div class="toolbar-info" id="toolbar-count">Showing 0 halls</div>
+            
+            <div class="toolbar-sort">
+              <label for="sort-halls">Sort By</label>
+              <select id="sort-halls">
+                <option value="popularity">Most Popular</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="rating-desc">Highest Rated</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Comparison Bar Indicator -->
+          <div id="compare-bar" style="display: none; justify-content: space-between; align-items: center; background: linear-gradient(to right, var(--color-primary), var(--color-secondary)); color: white; padding: 12px 24px; border-radius: var(--border-radius-sm); margin-bottom: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+            <div id="compare-bar-text" style="font-weight: 600;">0 / 3 halls selected for comparison</div>
+            <a href="compare.html" class="btn btn-glass btn-sm" style="color: white; border-color: rgba(255,255,255,0.4);">Compare Now ➔</a>
+          </div>
+
+          <!-- Cards Grid -->
+          <div class="grid-2" id="halls-grid-container" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+            <!-- Filled dynamically by halls.js -->
+          </div>
+        </main>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Mobile Filters Overlay -->
+  <div class="filters-overlay" id="filters-overlay"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color: white; margin-bottom: 20px;">
+          🏛️ Grand<span>Vows</span>
+        </a>
+        <p>GrandVows is a premier venue booking and event catalog platform. We assist families, couples, and organizations in finding and booking luxury halls, convention centers, and garden lawns.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook">FB</a>
+          <a href="#" class="social-icon" aria-label="Twitter">TW</a>
+          <a href="#" class="social-icon" aria-label="Instagram">IG</a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">LN</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="halls.html" class="footer-link">Function Halls</a></li>
+          <li><a href="regions.html" class="footer-link">Regions</a></li>
+          <li><a href="compare.html" class="footer-link">Compare Halls</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Help & Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+          <li><a href="#" class="footer-link">FAQs</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <h4 class="footer-title">Subscribe to Newsletter</h4>
+        <p>Receive venue deals, planning guides, and seasonal discounts directly in your inbox.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+          <input type="email" placeholder="Your Email Address" required aria-label="Email Address">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 GrandVows Banquets & Convention Booking Portal. All Rights Reserved.</div>
+      <div>Made with ❤️ for premium event hosting.</div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal Overlay -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-content">
+      <div class="modal-close" id="auth-modal-close">&times;</div>
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login">Login</div>
+        <div class="auth-tab" id="tab-register">Register</div>
+      </div>
+      <div class="auth-form-wrapper active" id="form-login-wrapper">
+        <form id="form-login">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-input" required placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+        </form>
+      </div>
+      <div class="auth-form-wrapper" id="form-register-wrapper">
+        <form id="form-register">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" class="form-input" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email Address</label>
+            <input type="email" id="register-email" class="form-input" required placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" class="form-input" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/halls.js"></script>
+</body>
+</html>

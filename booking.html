@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book your selected function hall. Fill out guest details, customize catering/decorations, apply coupons, and checkout.">
+  <title>Book a Venue | GrandVows</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Page Loader -->
+  <div class="page-loader" id="page-loader">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">🏛️ SETTING UP RESERVATION...</div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container navbar-container">
+      <a href="index.html" class="logo">
+        🏛️ Grand<span>Vows</span>
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="halls.html" class="nav-link">Function Halls</a></li>
+        <li><a href="regions.html" class="nav-link">Regions</a></li>
+        <li><a href="compare.html" class="nav-link">Compare Halls</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact Us</a></li>
+        <li><a href="dashboard.html" class="nav-link" style="display: none;">Dashboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode">
+          <span class="moon-icon">🌙</span>
+          <span class="sun-icon">☀️</span>
+        </button>
+        <button class="btn btn-outline btn-sm" id="auth-nav-btn">Login / Register</button>
+        <button class="menu-btn" id="menu-btn" aria-label="Toggle Mobile Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" style="min-height: 35vh; padding: 120px 0 30px 0;">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <h1 style="font-size: 2.5rem; margin-bottom: 8px;">Venue <span>Booking Checkout</span></h1>
+      <p style="font-size: 1rem; margin-bottom: 0;">Follow the simple 4-step wizard to secure your function hall slot.</p>
+    </div>
+  </section>
+
+  <!-- Checkout Wizard Main Content -->
+  <section class="section-padding" style="padding: 40px 0 80px 0;">
+    <div class="container">
+      
+      <!-- Wizard Step Indicators -->
+      <div class="step-indicators reveal-on-scroll">
+        <div class="step-indicator-item active" data-step="1">
+          <div class="step-number">1</div>
+          <div style="font-weight:600;">Contact Profile</div>
+        </div>
+        <div class="step-indicator-item" data-step="2">
+          <div class="step-number">2</div>
+          <div style="font-weight:600;">Event Details</div>
+        </div>
+        <div class="step-indicator-item" data-step="3">
+          <div class="step-number">3</div>
+          <div style="font-weight:600;">Service Addons</div>
+        </div>
+        <div class="step-indicator-item" data-step="4">
+          <div class="step-number">4</div>
+          <div style="font-weight:600;">Confirm Summary</div>
+        </div>
+      </div>
+
+      <!-- Main Columns Grid -->
+      <div class="booking-wizard-wrapper">
+        
+        <!-- Left: Form Steps -->
+        <main>
+          <form id="booking-wizard-form" style="display:contents;">
+            
+            <!-- Step 1: Customer Info -->
+            <div class="booking-form-step active glass-panel" style="padding: 40px;" data-step="1">
+              <h2 style="margin-bottom: 24px;">Personal Contact Information</h2>
+              <div class="form-group">
+                <label for="bkg-name">Full Name</label>
+                <input type="text" id="bkg-name" class="form-input" required placeholder="John Doe">
+              </div>
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="bkg-phone">Mobile Number</label>
+                  <input type="tel" id="bkg-phone" class="form-input" required placeholder="+91 XXXXX XXXXX">
+                </div>
+                <div class="form-group">
+                  <label for="bkg-email">Email Address</label>
+                  <input type="email" id="bkg-email" class="form-input" required placeholder="name@example.com">
+                </div>
+              </div>
+              
+              <div style="margin-top: 30px; display: flex; justify-content: flex-end;">
+                <button type="button" class="btn btn-primary checkout-next-btn">Next Step: Event Details ➔</button>
+              </div>
+            </div>
+
+            <!-- Step 2: Event Details -->
+            <div class="booking-form-step glass-panel" style="padding: 40px;" data-step="2">
+              <h2 style="margin-bottom: 24px;">Event Specifics</h2>
+              
+              <div class="form-group">
+                <label for="bkg-hall">Select Function Hall</label>
+                <select id="bkg-hall" class="form-input" required>
+                  <!-- Filled dynamically by booking.js -->
+                </select>
+              </div>
+
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="bkg-category">Event Category</label>
+                  <select id="bkg-category" class="form-input" required>
+                    <option value="Marriage">Marriage (Baseline Pricing)</option>
+                    <option value="Reception">Reception (85% baseline)</option>
+                    <option value="Engagement">Engagement (60% baseline)</option>
+                    <option value="Birthday Party">Birthday Party (35% baseline)</option>
+                    <option value="Baby Shower">Baby Shower (30% baseline)</option>
+                    <option value="Corporate Event">Corporate Event (75% baseline)</option>
+                    <option value="Anniversary">Anniversary (45% baseline)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="bkg-date">Preferred Event Date</label>
+                  <input type="date" id="bkg-date" class="form-input" min="2026-06-09" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="bkg-guests">Expected Guests Count</label>
+                <input type="number" id="bkg-guests" class="form-input" min="50" max="2500" value="250" required placeholder="e.g. 250">
+                <p style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Guest count affects per-head catering charges if chosen in services.</p>
+              </div>
+
+              <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+                <button type="button" class="btn btn-outline checkout-prev-btn">◀ Back</button>
+                <button type="button" class="btn btn-primary checkout-next-btn">Next Step: Addons ➔</button>
+              </div>
+            </div>
+
+            <!-- Step 3: Addons -->
+            <div class="booking-form-step glass-panel" style="padding: 40px;" data-step="3">
+              <h2 style="margin-bottom: 8px;">Select Additional Services</h2>
+              <p style="color:var(--text-secondary); margin-bottom: 24px; font-size:0.9rem;">Elevate your event. Check features to append them to your checkout calculation.</p>
+              
+              <div style="display:flex; flex-direction:column; gap:16px;">
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="catering" checked>
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">🍲 Premium Catering Service</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">Gourmet buffet including local delicacies, desserts and drinks. Charged at <b>₹450 per guest</b>.</span>
+                  </div>
+                </label>
+
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="decoration" checked>
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">✨ Theme Floral & Stage Decoration</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">Premium theme-specific setups, floral backdrops, welcome arches, and stage lighting. Flat <b>₹25,000</b>.</span>
+                  </div>
+                </label>
+
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="dj">
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">🎵 DJ Sound System</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">Professional audio speaker towers, bass subs, laser lights, and active DJ booth setup. Flat <b>₹12,000</b>.</span>
+                  </div>
+                </label>
+
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="photography">
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">📷 Professional Photography & Albums</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">High-definition traditional photography coverage (6 hours), edited digital catalog + printed album. Flat <b>₹15,000</b>.</span>
+                  </div>
+                </label>
+
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="videography">
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">📹 Cinematic Videography & Drone</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">Cinematic wedding highlights video, standard teaser clip, and aerial drone captures. Flat <b>₹20,000</b>.</span>
+                  </div>
+                </label>
+
+                <label class="service-checkbox-label" style="padding: 16px; border: 1px solid var(--glass-border); border-radius: var(--border-radius-sm); background: var(--bg-card);">
+                  <input type="checkbox" class="bkg-service-checkbox" value="flower">
+                  <div>
+                    <strong style="display:block; font-size:1rem; margin-bottom:4px;">🌸 Traditional Flower Garlands & Arches</strong>
+                    <span style="font-size:0.85rem; color:var(--text-secondary);">Fresh jasmine and rose garlands, entry corridor flower pillars. Flat <b>₹8,000</b>.</span>
+                  </div>
+                </label>
+              </div>
+
+              <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+                <button type="button" class="btn btn-outline checkout-prev-btn">◀ Back</button>
+                <button type="button" class="btn btn-primary checkout-next-btn">Next Step: Summary ➔</button>
+              </div>
+            </div>
+
+            <!-- Step 4: Summary -->
+            <div class="booking-form-step glass-panel" style="padding: 40px;" data-step="4">
+              <h2 style="margin-bottom: 8px;">Review Booking Summary</h2>
+              <p style="color:var(--text-secondary); margin-bottom: 24px; font-size:0.9rem;">Please review your choices before confirming the slot. This payment simulation does not charge real currency.</p>
+              
+              <!-- Target for summary rendering -->
+              <div class="glass-panel" id="summary-details-box" style="padding: 24px; background:var(--bg-input); border:none; border-radius: var(--border-radius-sm); margin-bottom:30px;">
+                <!-- Filled dynamically by booking.js -->
+              </div>
+
+              <div style="margin-top: 30px; display: flex; justify-content: space-between; align-items:center;">
+                <button type="button" class="btn btn-outline checkout-prev-btn">◀ Back</button>
+                <button type="submit" class="btn btn-primary btn-lg" style="box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); background: var(--success);">Confirm Booking & Lock Slot</button>
+              </div>
+            </div>
+
+          </form>
+        </main>
+
+        <!-- Right Sidebar Pricing Breakdown -->
+        <aside class="booking-sidebar-summary glass-panel">
+          <h3 style="margin-bottom: 16px; font-size: 1.2rem;">Booking Cost Breakout</h3>
+          
+          <div style="font-size: 0.8rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Active Selection</div>
+          <h4 id="summary-hall-name" style="font-size: 1.1rem; color:var(--color-primary); margin-bottom: 20px;">None Selected</h4>
+
+          <div class="results-price-breakout" style="margin-bottom: 0; padding-bottom: 12px; border-bottom: none;">
+            <div class="price-row">
+              <span>Venue Baseline Rent:</span>
+              <span id="sum-base">₹0</span>
+            </div>
+            <div class="price-row">
+              <span>Service Addons:</span>
+              <span id="sum-services">₹0</span>
+            </div>
+            <div class="price-row" id="sum-discount-row" style="display: none; color: var(--success); font-weight:700;">
+              <span>Coupon Discount:</span>
+              <span id="sum-discount">-₹0</span>
+            </div>
+            <div class="price-row total" style="margin-top:10px; padding-top:12px; border-top:1px dashed var(--glass-border);">
+              <span>Final Total Cost:</span>
+              <span id="sum-total">₹0</span>
+            </div>
+          </div>
+
+          <!-- Coupon code applying input -->
+          <div class="coupon-section">
+            <input type="text" id="bkg-coupon-code" class="form-input" style="padding: 8px 12px; text-transform: uppercase; font-size:0.9rem;" placeholder="COUPON CODE">
+            <button type="button" id="apply-coupon-btn" class="btn btn-primary btn-sm" style="padding: 10px;">Apply</button>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 8px; line-height:1.4;">Try using <b>WELCOME10</b> (10% off) or <b>FESTIVE20</b> (20% off bookings above ₹50k).</p>
+        </aside>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" style="color: white; margin-bottom: 20px;">
+          🏛️ Grand<span>Vows</span>
+        </a>
+        <p>GrandVows is a premier venue booking and event catalog platform. We assist families, couples, and organizations in finding and booking luxury halls, convention centers, and garden lawns.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="Facebook">FB</a>
+          <a href="#" class="social-icon" aria-label="Twitter">TW</a>
+          <a href="#" class="social-icon" aria-label="Instagram">IG</a>
+          <a href="#" class="social-icon" aria-label="LinkedIn">LN</a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" class="footer-link">Home</a></li>
+          <li><a href="halls.html" class="footer-link">Function Halls</a></li>
+          <li><a href="regions.html" class="footer-link">Regions</a></li>
+          <li><a href="compare.html" class="footer-link">Compare Halls</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Help & Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+          <li><a href="#" class="footer-link">FAQs</a></li>
+          <li><a href="#" class="footer-link">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-newsletter">
+        <h4 class="footer-title">Subscribe to Newsletter</h4>
+        <p>Receive venue deals, planning guides, and seasonal discounts directly in your inbox.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+          <input type="email" placeholder="Your Email Address" required aria-label="Email Address">
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 GrandVows Banquets & Convention Booking Portal. All Rights Reserved.</div>
+      <div>Made with ❤️ for premium event hosting.</div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal Overlay -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal-content">
+      <div class="modal-close" id="auth-modal-close">&times;</div>
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="tab-login">Login</div>
+        <div class="auth-tab" id="tab-register">Register</div>
+      </div>
+      <div class="auth-form-wrapper active" id="form-login-wrapper">
+        <form id="form-login">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-input" required placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Log In</button>
+        </form>
+      </div>
+      <div class="auth-form-wrapper" id="form-register-wrapper">
+        <form id="form-register">
+          <div class="form-group">
+            <label for="register-name">Full Name</label>
+            <input type="text" id="register-name" class="form-input" required placeholder="John Doe">
+          </div>
+          <div class="form-group">
+            <label for="register-email">Email Address</label>
+            <input type="email" id="register-email" class="form-input" required placeholder="name@example.com">
+          </div>
+          <div class="form-group">
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" class="form-input" required placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>
